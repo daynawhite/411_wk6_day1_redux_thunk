@@ -27,3 +27,10 @@ export const fetchMakes = () => {
         })
     }
 }
+
+export const deleteMake = (index) => {
+    return {
+        type: 'REMOVE_MAKE',
+        value: index
+    }
+}
