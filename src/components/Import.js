@@ -20,19 +20,28 @@ const ITEM_HEIGHT = 48;
 
 const Import = (props) => {
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = React.useState(null)
+    const [itemToDelete, setItemToDelete] = React.useState(null)
     const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
+    let currentIdx;
+
+    const handleClick = (event, id) => {
+      setAnchorEl(event.currentTarget)
+      setItemToDelete(id)
+      ;
     };
     const handleClose = () => {
       setAnchorEl(null);
     };
+
+
     const handleDelete = () => {
-        props.deleteMake();
+        props.deleteMake(itemToDelete);
         handleClose()
+        setItemToDelete(null)
     }
 
+    console.log(props.makes)
     return (
         <Container maxWidth="lg" className="car-container">
             <Button onClick={props.fetchMakes} variant='contained' color='primary'>Import</Button>
@@ -46,7 +55,8 @@ const Import = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                {props.makes.map((make) => (
+                {props.makes.map((make, index) => (
+                    
                     <TableRow key={make.MakeId}>
                         <TableCell component="th" scope="row">
                             {make.MakeId}
@@ -59,7 +69,7 @@ const Import = (props) => {
                                 aria-controls={open ? 'long-menu' : undefined}
                                 aria-expanded={open ? 'true' : undefined}
                                 aria-haspopup="true"
-                                onClick={handleClick}>
+                                onClick={(event) => handleClick(event, make.MakeId)}>
                                 <MoreVertIcon />
                             </IconButton>
                             <Menu
@@ -77,10 +87,10 @@ const Import = (props) => {
                                 },
                                 }}
                             >
+                               
                                 {options.map((option) => (
-                                <MenuItem key={option} selected={option === 'Delete'} onClick={handleDelete}>
-                                {/* // {handleClose}>  */}
-                                   {option}
+                                <MenuItem key={option} selected={option === 'Delete'} onClick={() => handleDelete(make.MakeId)}>
+                                    {option}
                                 </MenuItem>
                                 ))}
                             </Menu>

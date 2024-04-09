@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchMakes: () => dispatch(fetchMakes()),
-        deleteMake: () => dispatch(deleteMake())
+        deleteMake: (index) => dispatch(deleteMake(index))
     }
 }
 

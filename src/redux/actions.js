@@ -19,6 +19,7 @@ export const fetchMakes = () => {
     fetch(url)
         .then(res => res.json())
         .then(response => {
+            console.log(response)
             const action = {
             type: "FETCH_MAKES",
             value: response.Results
@@ -28,9 +29,9 @@ export const fetchMakes = () => {
     }
 }
 
-export const deleteMake = (index) => {
+export const deleteMake = (id) => {
     return {
         type: 'REMOVE_MAKE',
-        value: index
+        value: id
     }
 }

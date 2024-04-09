@@ -20,9 +20,10 @@ const makes = (state = [], action) => {
         case 'FETCH_MAKES':
             return action.value
         case 'REMOVE_MAKE':
-            const makes = [ ...state ]
-            makes.splice(action.value, 1)
-            return makes
+            // const makes = [ ...state ]
+            // makes.splice(action.value, 1)
+            console.log(action.value)
+            return state.filter((make) => make.MakeId !== action.value)
         default:
             return state
     }
